@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+
+</head>
+
+<body>
+    <div style="margin-top: 15px;" class="ui container">
+        <h1 class='ui center aligned header'> TO DO DA</h1>
+
+
+        <form class="ui form" action='/add' method="post">
+
+            <div>
+                <label for="title">Tasks:   </label>
+                <br>
+                <input type="text" name="title" id="title" placeholder="Enter Todo..">
+                <br>
+                <br>
+                <button class="ui blue button" type="submit">❯</button>
+
+            </div>
+
+        </form>
+        <div class="ui  segment  ">
+
+            {% for todo in todo_list %}
+            <!-- <div class="ui  red segment  "> -->
+
+            {% if todo.id % 2==1 %}
+            <div class="ui  red segment  ">
+
+                <p class="ui big header">{{todo.title}}</p>
+
+                {% if todo.complete==False %}
+                <span class="ui gray label">Not Completed</span> {% else %}
+                <span class="ui green label"> Completed</span> {% endif %}
+
+                <a class="ui blue button" href="/update/{{todo.id}}">✓</a>
+                <a class="ui red button" href="/delete/{{todo.id}}">✖</a>
+            </div>
+            {% else %}
+            <div class="ui  blue segment  ">
+
+                <p class="ui big header">{{todo.title}}</p>
+                {% if todo.complete==False %}
+                <span class="ui gray label">Not Completed</span> {% else %}
+                <span class="ui green label"> Completed</span> {% endif %}
+
+                <a class="ui blue button" href="/update/{{todo.id}}">✓</a>
+                <a class="ui red button" href="/delete/{{todo.id}}">✖</a>
+            </div>
+            {% endif %}
+            <!-- 🗑️ -->
+
+            <!-- <p class="ui big header">{{todo.title}}</p> -->
+
+
+            {% endfor %}
+
+
+            <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+        </div>
+    </div>
+</body>
+
+</html>
